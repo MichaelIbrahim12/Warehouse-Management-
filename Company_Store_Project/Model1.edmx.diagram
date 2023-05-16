@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="bf1e5aa5179e455f8f571b168423f1f1" Name="Diagram1">
+        <EntityTypeShape EntityType="Company_storeEntities.Client" Width="1.5" PointX="5.75" PointY="0.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="Company_storeEntities.Export_perm" Width="1.5" PointX="7.125" PointY="8.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="Company_storeEntities.Export_product" Width="1.5" PointX="5.375" PointY="4.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="Company_storeEntities.Import_perm" Width="1.5" PointX="3.75" PointY="14.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="Company_storeEntities.Import_product" Width="1.5" PointX="7.875" PointY="3.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="Company_storeEntities.Product" Width="1.5" PointX="0.75" PointY="5.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="Company_storeEntities.Product_unit" Width="1.5" PointX="4.375" PointY="8.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="Company_storeEntities.Store" Width="1.5" PointX="0.75" PointY="2.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="Company_storeEntities.store_product" Width="1.5" PointX="3" PointY="2.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="Company_storeEntities.Supplier" Width="1.5" PointX="1.5" PointY="15.25" IsExpanded="true" />
+        <AssociationConnector Association="Company_storeEntities.FK_Export_perm_Store" ManuallyRouted="false" />
+        <AssociationConnector Association="Company_storeEntities.FK_Export_perm_Supplier" ManuallyRouted="false" />
+        <AssociationConnector Association="Company_storeEntities.FK_Export_product_Export_perm" ManuallyRouted="false" />
+        <AssociationConnector Association="Company_storeEntities.FK_Export_product_Product" ManuallyRouted="false" />
+        <AssociationConnector Association="Company_storeEntities.FK_Import_perm_Store" ManuallyRouted="false" />
+        <AssociationConnector Association="Company_storeEntities.FK_Import_perm_Supplier" ManuallyRouted="false" />
+        <AssociationConnector Association="Company_storeEntities.FK_Import_product_Import_perm" ManuallyRouted="false" />
+        <AssociationConnector Association="Company_storeEntities.FK_Import_product_Product" ManuallyRouted="false" />
+        <AssociationConnector Association="Company_storeEntities.FK_Product_unit_Product" ManuallyRouted="false" />
+        <AssociationConnector Association="Company_storeEntities.FK_store_product_Product" ManuallyRouted="false" />
+        <AssociationConnector Association="Company_storeEntities.FK_store_product_Store" ManuallyRouted="false" />
+        <EntityTypeShape EntityType="Company_storeEntities.Transfer_Product" Width="1.5" PointX="6.75" PointY="11.75" />
+        <AssociationConnector Association="Company_storeEntities.FK_Transfer_Product_Product" />
+        <AssociationConnector Association="Company_storeEntities.FK_Transfer_Product_Store" />
+        <AssociationConnector Association="Company_storeEntities.FK_Transfer_Product_Store1" />
+        <AssociationConnector Association="Company_storeEntities.FK_Transfer_Product_Supplier" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>

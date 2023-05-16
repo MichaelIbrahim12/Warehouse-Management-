@@ -1,0 +1,951 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+    <Schema Namespace="Company_storeEntities.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="Client">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" Nullable="false" />
+          <Property Name="First_Name" Type="varchar" MaxLength="50" />
+          <Property Name="Last_Name" Type="varchar" MaxLength="50" />
+          <Property Name="Telephone" Type="varchar" MaxLength="50" />
+          <Property Name="fax" Type="varchar" MaxLength="50" />
+          <Property Name="mobile" Type="varchar" MaxLength="50" />
+          <Property Name="email" Type="varchar" MaxLength="50" />
+          <Property Name="website" Type="varchar" MaxLength="50" />
+        </EntityType>
+        <EntityType Name="Export_perm">
+          <Key>
+            <PropertyRef Name="perm_id" />
+          </Key>
+          <Property Name="perm_id" Type="int" Nullable="false" />
+          <Property Name="supplier_id" Type="int" />
+          <Property Name="store_id" Type="int" />
+          <Property Name="perm_date" Type="datetime" />
+        </EntityType>
+        <EntityType Name="Export_product">
+          <Key>
+            <PropertyRef Name="Perm_id" />
+            <PropertyRef Name="product_id" />
+          </Key>
+          <Property Name="Perm_id" Type="int" Nullable="false" />
+          <Property Name="product_id" Type="int" Nullable="false" />
+          <Property Name="quantity" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Import_perm">
+          <Key>
+            <PropertyRef Name="per_id" />
+          </Key>
+          <Property Name="per_id" Type="int" Nullable="false" />
+          <Property Name="supplier_id" Type="int" />
+          <Property Name="store_id" Type="int" />
+          <Property Name="perm_date" Type="date" />
+        </EntityType>
+        <EntityType Name="Import_product">
+          <Key>
+            <PropertyRef Name="perm_id" />
+            <PropertyRef Name="product_id" />
+          </Key>
+          <Property Name="perm_id" Type="int" Nullable="false" />
+          <Property Name="product_id" Type="int" Nullable="false" />
+          <Property Name="quantity" Type="int" Nullable="false" />
+          <Property Name="unit" Type="varchar" MaxLength="10" Nullable="false" />
+          <Property Name="production_date" Type="date" Nullable="false" />
+          <Property Name="expire_date" Type="date" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Product">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" Nullable="false" />
+          <Property Name="Name" Type="varchar" MaxLength="50" />
+        </EntityType>
+        <EntityType Name="Product_unit">
+          <Key>
+            <PropertyRef Name="id" />
+            <PropertyRef Name="unit" />
+          </Key>
+          <Property Name="id" Type="int" Nullable="false" />
+          <Property Name="unit" Type="varchar" MaxLength="50" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Store">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" Nullable="false" />
+          <Property Name="Name" Type="varchar" MaxLength="50" />
+          <Property Name="Manger_Name" Type="varchar" MaxLength="50" />
+        </EntityType>
+        <EntityType Name="store_product">
+          <Key>
+            <PropertyRef Name="store_id" />
+            <PropertyRef Name="product_id" />
+          </Key>
+          <Property Name="store_id" Type="int" Nullable="false" />
+          <Property Name="product_id" Type="int" Nullable="false" />
+          <Property Name="quantity" Type="int" />
+          <Property Name="unit" Type="varchar" MaxLength="50" />
+          <Property Name="production_date" Type="date" />
+          <Property Name="expire_date" Type="date" />
+        </EntityType>
+        <EntityType Name="Supplier">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" Nullable="false" />
+          <Property Name="First_Name" Type="varchar" MaxLength="50" />
+          <Property Name="Last_Name" Type="varchar" MaxLength="50" />
+          <Property Name="Telephone" Type="varchar" MaxLength="50" />
+          <Property Name="fax" Type="varchar" MaxLength="50" />
+          <Property Name="mobile" Type="varchar" MaxLength="50" />
+          <Property Name="email" Type="varchar" MaxLength="50" />
+          <Property Name="website" Type="varchar" MaxLength="50" />
+        </EntityType>
+        <EntityType Name="Transfer_Product">
+          <Key>
+            <PropertyRef Name="Transfer_id" />
+          </Key>
+          <Property Name="Transfer_id" Type="int" Nullable="false" />
+          <Property Name="Transfer_date" Type="date" />
+          <Property Name="From_store_id" Type="int" />
+          <Property Name="To_store_id" Type="int" />
+          <Property Name="Supplier_id" Type="int" />
+          <Property Name="Product_id" Type="int" />
+          <Property Name="Quantity" Type="int" />
+          <Property Name="unit" Type="varchar" MaxLength="50" />
+          <Property Name="Production_date" Type="date" />
+          <Property Name="Expire_date" Type="date" />
+        </EntityType>
+        <Association Name="FK_Export_perm_Store">
+          <End Role="Store" Type="Self.Store" Multiplicity="0..1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="Export_perm" Type="Self.Export_perm" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Store">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="Export_perm">
+              <PropertyRef Name="store_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Export_perm_Supplier">
+          <End Role="Supplier" Type="Self.Supplier" Multiplicity="0..1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="Export_perm" Type="Self.Export_perm" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Supplier">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="Export_perm">
+              <PropertyRef Name="supplier_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Export_product_Export_perm">
+          <End Role="Export_perm" Type="Self.Export_perm" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="Export_product" Type="Self.Export_product" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Export_perm">
+              <PropertyRef Name="perm_id" />
+            </Principal>
+            <Dependent Role="Export_product">
+              <PropertyRef Name="Perm_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Export_product_Product">
+          <End Role="Product" Type="Self.Product" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="Export_product" Type="Self.Export_product" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Product">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="Export_product">
+              <PropertyRef Name="product_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Import_perm_Store">
+          <End Role="Store" Type="Self.Store" Multiplicity="0..1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="Import_perm" Type="Self.Import_perm" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Store">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="Import_perm">
+              <PropertyRef Name="store_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Import_perm_Supplier">
+          <End Role="Supplier" Type="Self.Supplier" Multiplicity="0..1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="Import_perm" Type="Self.Import_perm" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Supplier">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="Import_perm">
+              <PropertyRef Name="supplier_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Import_product_Import_perm">
+          <End Role="Import_perm" Type="Self.Import_perm" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="Import_product" Type="Self.Import_product" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Import_perm">
+              <PropertyRef Name="per_id" />
+            </Principal>
+            <Dependent Role="Import_product">
+              <PropertyRef Name="perm_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Import_product_Product">
+          <End Role="Product" Type="Self.Product" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="Import_product" Type="Self.Import_product" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Product">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="Import_product">
+              <PropertyRef Name="product_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Product_unit_Product">
+          <End Role="Product" Type="Self.Product" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="Product_unit" Type="Self.Product_unit" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Product">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="Product_unit">
+              <PropertyRef Name="id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_store_product_Product">
+          <End Role="Product" Type="Self.Product" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="store_product" Type="Self.store_product" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Product">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="store_product">
+              <PropertyRef Name="product_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_store_product_Store">
+          <End Role="Store" Type="Self.Store" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="store_product" Type="Self.store_product" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Store">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="store_product">
+              <PropertyRef Name="store_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Transfer_Product_Product">
+          <End Role="Product" Type="Self.Product" Multiplicity="0..1" />
+          <End Role="Transfer_Product" Type="Self.Transfer_Product" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Product">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="Transfer_Product">
+              <PropertyRef Name="Product_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Transfer_Product_Store">
+          <End Role="Store" Type="Self.Store" Multiplicity="0..1" />
+          <End Role="Transfer_Product" Type="Self.Transfer_Product" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Store">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="Transfer_Product">
+              <PropertyRef Name="From_store_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Transfer_Product_Store1">
+          <End Role="Store" Type="Self.Store" Multiplicity="0..1" />
+          <End Role="Transfer_Product" Type="Self.Transfer_Product" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Store">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="Transfer_Product">
+              <PropertyRef Name="To_store_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Transfer_Product_Supplier">
+          <End Role="Supplier" Type="Self.Supplier" Multiplicity="0..1" />
+          <End Role="Transfer_Product" Type="Self.Transfer_Product" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Supplier">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="Transfer_Product">
+              <PropertyRef Name="Supplier_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="Company_storeEntitiesStoreContainer">
+          <EntitySet Name="Client" EntityType="Self.Client" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Export_perm" EntityType="Self.Export_perm" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Export_product" EntityType="Self.Export_product" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Import_perm" EntityType="Self.Import_perm" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Import_product" EntityType="Self.Import_product" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Product" EntityType="Self.Product" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Product_unit" EntityType="Self.Product_unit" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Store" EntityType="Self.Store" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="store_product" EntityType="Self.store_product" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Supplier" EntityType="Self.Supplier" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Transfer_Product" EntityType="Self.Transfer_Product" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK_Export_perm_Store" Association="Self.FK_Export_perm_Store">
+            <End Role="Store" EntitySet="Store" />
+            <End Role="Export_perm" EntitySet="Export_perm" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Export_perm_Supplier" Association="Self.FK_Export_perm_Supplier">
+            <End Role="Supplier" EntitySet="Supplier" />
+            <End Role="Export_perm" EntitySet="Export_perm" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Export_product_Export_perm" Association="Self.FK_Export_product_Export_perm">
+            <End Role="Export_perm" EntitySet="Export_perm" />
+            <End Role="Export_product" EntitySet="Export_product" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Export_product_Product" Association="Self.FK_Export_product_Product">
+            <End Role="Product" EntitySet="Product" />
+            <End Role="Export_product" EntitySet="Export_product" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Import_perm_Store" Association="Self.FK_Import_perm_Store">
+            <End Role="Store" EntitySet="Store" />
+            <End Role="Import_perm" EntitySet="Import_perm" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Import_perm_Supplier" Association="Self.FK_Import_perm_Supplier">
+            <End Role="Supplier" EntitySet="Supplier" />
+            <End Role="Import_perm" EntitySet="Import_perm" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Import_product_Import_perm" Association="Self.FK_Import_product_Import_perm">
+            <End Role="Import_perm" EntitySet="Import_perm" />
+            <End Role="Import_product" EntitySet="Import_product" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Import_product_Product" Association="Self.FK_Import_product_Product">
+            <End Role="Product" EntitySet="Product" />
+            <End Role="Import_product" EntitySet="Import_product" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Product_unit_Product" Association="Self.FK_Product_unit_Product">
+            <End Role="Product" EntitySet="Product" />
+            <End Role="Product_unit" EntitySet="Product_unit" />
+          </AssociationSet>
+          <AssociationSet Name="FK_store_product_Product" Association="Self.FK_store_product_Product">
+            <End Role="Product" EntitySet="Product" />
+            <End Role="store_product" EntitySet="store_product" />
+          </AssociationSet>
+          <AssociationSet Name="FK_store_product_Store" Association="Self.FK_store_product_Store">
+            <End Role="Store" EntitySet="Store" />
+            <End Role="store_product" EntitySet="store_product" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Transfer_Product_Product" Association="Self.FK_Transfer_Product_Product">
+            <End Role="Product" EntitySet="Product" />
+            <End Role="Transfer_Product" EntitySet="Transfer_Product" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Transfer_Product_Store" Association="Self.FK_Transfer_Product_Store">
+            <End Role="Store" EntitySet="Store" />
+            <End Role="Transfer_Product" EntitySet="Transfer_Product" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Transfer_Product_Store1" Association="Self.FK_Transfer_Product_Store1">
+            <End Role="Store" EntitySet="Store" />
+            <End Role="Transfer_Product" EntitySet="Transfer_Product" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Transfer_Product_Supplier" Association="Self.FK_Transfer_Product_Supplier">
+            <End Role="Supplier" EntitySet="Supplier" />
+            <End Role="Transfer_Product" EntitySet="Transfer_Product" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema></edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="Company_storeEntities" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="Client">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" />
+          <Property Name="First_Name" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Last_Name" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Telephone" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="fax" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="mobile" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="email" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="website" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+        </EntityType>
+        <EntityType Name="Export_perm">
+          <Key>
+            <PropertyRef Name="perm_id" />
+          </Key>
+          <Property Name="perm_id" Type="Int32" Nullable="false" />
+          <Property Name="supplier_id" Type="Int32" />
+          <Property Name="store_id" Type="Int32" />
+          <Property Name="perm_date" Type="DateTime" Precision="3" />
+          <NavigationProperty Name="Store" Relationship="Self.FK_Export_perm_Store" FromRole="Export_perm" ToRole="Store" />
+          <NavigationProperty Name="Supplier" Relationship="Self.FK_Export_perm_Supplier" FromRole="Export_perm" ToRole="Supplier" />
+          <NavigationProperty Name="Export_product" Relationship="Self.FK_Export_product_Export_perm" FromRole="Export_perm" ToRole="Export_product" />
+        </EntityType>
+        <EntityType Name="Export_product">
+          <Key>
+            <PropertyRef Name="Perm_id" />
+            <PropertyRef Name="product_id" />
+          </Key>
+          <Property Name="Perm_id" Type="Int32" Nullable="false" />
+          <Property Name="product_id" Type="Int32" Nullable="false" />
+          <Property Name="quantity" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Export_perm" Relationship="Self.FK_Export_product_Export_perm" FromRole="Export_product" ToRole="Export_perm" />
+          <NavigationProperty Name="Product" Relationship="Self.FK_Export_product_Product" FromRole="Export_product" ToRole="Product" />
+        </EntityType>
+        <EntityType Name="Import_perm">
+          <Key>
+            <PropertyRef Name="per_id" />
+          </Key>
+          <Property Name="per_id" Type="Int32" Nullable="false" />
+          <Property Name="supplier_id" Type="Int32" />
+          <Property Name="store_id" Type="Int32" />
+          <Property Name="perm_date" Type="DateTime" Precision="0" />
+          <NavigationProperty Name="Store" Relationship="Self.FK_Import_perm_Store" FromRole="Import_perm" ToRole="Store" />
+          <NavigationProperty Name="Supplier" Relationship="Self.FK_Import_perm_Supplier" FromRole="Import_perm" ToRole="Supplier" />
+          <NavigationProperty Name="Import_product" Relationship="Self.FK_Import_product_Import_perm" FromRole="Import_perm" ToRole="Import_product" />
+        </EntityType>
+        <EntityType Name="Import_product">
+          <Key>
+            <PropertyRef Name="perm_id" />
+            <PropertyRef Name="product_id" />
+          </Key>
+          <Property Name="perm_id" Type="Int32" Nullable="false" />
+          <Property Name="product_id" Type="Int32" Nullable="false" />
+          <Property Name="quantity" Type="Int32" Nullable="false" />
+          <Property Name="unit" Type="String" MaxLength="10" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="production_date" Type="DateTime" Nullable="false" Precision="0" />
+          <Property Name="expire_date" Type="DateTime" Nullable="false" Precision="0" />
+          <NavigationProperty Name="Import_perm" Relationship="Self.FK_Import_product_Import_perm" FromRole="Import_product" ToRole="Import_perm" />
+          <NavigationProperty Name="Product" Relationship="Self.FK_Import_product_Product" FromRole="Import_product" ToRole="Product" />
+        </EntityType>
+        <EntityType Name="Product">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" />
+          <Property Name="Name" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="Export_product" Relationship="Self.FK_Export_product_Product" FromRole="Product" ToRole="Export_product" />
+          <NavigationProperty Name="Import_product" Relationship="Self.FK_Import_product_Product" FromRole="Product" ToRole="Import_product" />
+          <NavigationProperty Name="Product_unit" Relationship="Self.FK_Product_unit_Product" FromRole="Product" ToRole="Product_unit" />
+          <NavigationProperty Name="store_product" Relationship="Self.FK_store_product_Product" FromRole="Product" ToRole="store_product" />
+          <NavigationProperty Name="Transfer_Product" Relationship="Company_storeEntities.FK_Transfer_Product_Product" FromRole="Product" ToRole="Transfer_Product" />
+        </EntityType>
+        <EntityType Name="Product_unit">
+          <Key>
+            <PropertyRef Name="id" />
+            <PropertyRef Name="unit" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" />
+          <Property Name="unit" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <NavigationProperty Name="Product" Relationship="Self.FK_Product_unit_Product" FromRole="Product_unit" ToRole="Product" />
+        </EntityType>
+        <EntityType Name="Store">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" />
+          <Property Name="Name" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Manger_Name" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="Export_perm" Relationship="Self.FK_Export_perm_Store" FromRole="Store" ToRole="Export_perm" />
+          <NavigationProperty Name="Import_perm" Relationship="Self.FK_Import_perm_Store" FromRole="Store" ToRole="Import_perm" />
+          <NavigationProperty Name="store_product" Relationship="Self.FK_store_product_Store" FromRole="Store" ToRole="store_product" />
+          <NavigationProperty Name="Transfer_Product" Relationship="Company_storeEntities.FK_Transfer_Product_Store" FromRole="Store" ToRole="Transfer_Product" />
+          <NavigationProperty Name="Transfer_Product1" Relationship="Company_storeEntities.FK_Transfer_Product_Store1" FromRole="Store" ToRole="Transfer_Product" />
+        </EntityType>
+        <EntityType Name="store_product">
+          <Key>
+            <PropertyRef Name="store_id" />
+            <PropertyRef Name="product_id" />
+          </Key>
+          <Property Name="store_id" Type="Int32" Nullable="false" />
+          <Property Name="product_id" Type="Int32" Nullable="false" />
+          <Property Name="quantity" Type="Int32" />
+          <Property Name="unit" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="Product" Relationship="Self.FK_store_product_Product" FromRole="store_product" ToRole="Product" />
+          <NavigationProperty Name="Store" Relationship="Self.FK_store_product_Store" FromRole="store_product" ToRole="Store" />
+          <Property Name="production_date" Type="DateTime" Precision="0" />
+          <Property Name="expire_date" Type="DateTime" Precision="0" />
+        </EntityType>
+        <EntityType Name="Supplier">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" />
+          <Property Name="First_Name" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Last_Name" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Telephone" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="fax" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="mobile" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="email" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="website" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="Export_perm" Relationship="Self.FK_Export_perm_Supplier" FromRole="Supplier" ToRole="Export_perm" />
+          <NavigationProperty Name="Import_perm" Relationship="Self.FK_Import_perm_Supplier" FromRole="Supplier" ToRole="Import_perm" />
+          <NavigationProperty Name="Transfer_Product" Relationship="Company_storeEntities.FK_Transfer_Product_Supplier" FromRole="Supplier" ToRole="Transfer_Product" />
+        </EntityType>
+        <Association Name="FK_Export_perm_Store">
+          <End Role="Store" Type="Self.Store" Multiplicity="0..1" />
+          <End Role="Export_perm" Type="Self.Export_perm" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Store">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="Export_perm">
+              <PropertyRef Name="store_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Export_perm_Supplier">
+          <End Role="Supplier" Type="Self.Supplier" Multiplicity="0..1" />
+          <End Role="Export_perm" Type="Self.Export_perm" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Supplier">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="Export_perm">
+              <PropertyRef Name="supplier_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Export_product_Export_perm">
+          <End Role="Export_perm" Type="Self.Export_perm" Multiplicity="1" />
+          <End Role="Export_product" Type="Self.Export_product" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Export_perm">
+              <PropertyRef Name="perm_id" />
+            </Principal>
+            <Dependent Role="Export_product">
+              <PropertyRef Name="Perm_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Export_product_Product">
+          <End Role="Product" Type="Self.Product" Multiplicity="1" />
+          <End Role="Export_product" Type="Self.Export_product" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Product">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="Export_product">
+              <PropertyRef Name="product_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Import_perm_Store">
+          <End Role="Store" Type="Self.Store" Multiplicity="0..1" />
+          <End Role="Import_perm" Type="Self.Import_perm" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Store">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="Import_perm">
+              <PropertyRef Name="store_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Import_perm_Supplier">
+          <End Role="Supplier" Type="Self.Supplier" Multiplicity="0..1" />
+          <End Role="Import_perm" Type="Self.Import_perm" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Supplier">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="Import_perm">
+              <PropertyRef Name="supplier_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Import_product_Import_perm">
+          <End Role="Import_perm" Type="Self.Import_perm" Multiplicity="1" />
+          <End Role="Import_product" Type="Self.Import_product" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Import_perm">
+              <PropertyRef Name="per_id" />
+            </Principal>
+            <Dependent Role="Import_product">
+              <PropertyRef Name="perm_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Import_product_Product">
+          <End Role="Product" Type="Self.Product" Multiplicity="1" />
+          <End Role="Import_product" Type="Self.Import_product" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Product">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="Import_product">
+              <PropertyRef Name="product_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Product_unit_Product">
+          <End Role="Product" Type="Self.Product" Multiplicity="1" />
+          <End Role="Product_unit" Type="Self.Product_unit" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Product">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="Product_unit">
+              <PropertyRef Name="id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_store_product_Product">
+          <End Role="Product" Type="Self.Product" Multiplicity="1" />
+          <End Role="store_product" Type="Self.store_product" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Product">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="store_product">
+              <PropertyRef Name="product_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_store_product_Store">
+          <End Role="Store" Type="Self.Store" Multiplicity="1" />
+          <End Role="store_product" Type="Self.store_product" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Store">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="store_product">
+              <PropertyRef Name="store_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="Company_storeEntities1" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="Clients" EntityType="Self.Client" />
+          <EntitySet Name="Export_perm" EntityType="Self.Export_perm" />
+          <EntitySet Name="Export_product" EntityType="Self.Export_product" />
+          <EntitySet Name="Import_perm" EntityType="Self.Import_perm" />
+          <EntitySet Name="Import_product" EntityType="Self.Import_product" />
+          <EntitySet Name="Products" EntityType="Self.Product" />
+          <EntitySet Name="Product_unit" EntityType="Self.Product_unit" />
+          <EntitySet Name="Stores" EntityType="Self.Store" />
+          <EntitySet Name="store_product" EntityType="Self.store_product" />
+          <EntitySet Name="Suppliers" EntityType="Self.Supplier" />
+          <AssociationSet Name="FK_Export_perm_Store" Association="Self.FK_Export_perm_Store">
+            <End Role="Store" EntitySet="Stores" />
+            <End Role="Export_perm" EntitySet="Export_perm" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Export_perm_Supplier" Association="Self.FK_Export_perm_Supplier">
+            <End Role="Supplier" EntitySet="Suppliers" />
+            <End Role="Export_perm" EntitySet="Export_perm" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Export_product_Export_perm" Association="Self.FK_Export_product_Export_perm">
+            <End Role="Export_perm" EntitySet="Export_perm" />
+            <End Role="Export_product" EntitySet="Export_product" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Export_product_Product" Association="Self.FK_Export_product_Product">
+            <End Role="Product" EntitySet="Products" />
+            <End Role="Export_product" EntitySet="Export_product" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Import_perm_Store" Association="Self.FK_Import_perm_Store">
+            <End Role="Store" EntitySet="Stores" />
+            <End Role="Import_perm" EntitySet="Import_perm" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Import_perm_Supplier" Association="Self.FK_Import_perm_Supplier">
+            <End Role="Supplier" EntitySet="Suppliers" />
+            <End Role="Import_perm" EntitySet="Import_perm" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Import_product_Import_perm" Association="Self.FK_Import_product_Import_perm">
+            <End Role="Import_perm" EntitySet="Import_perm" />
+            <End Role="Import_product" EntitySet="Import_product" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Import_product_Product" Association="Self.FK_Import_product_Product">
+            <End Role="Product" EntitySet="Products" />
+            <End Role="Import_product" EntitySet="Import_product" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Product_unit_Product" Association="Self.FK_Product_unit_Product">
+            <End Role="Product" EntitySet="Products" />
+            <End Role="Product_unit" EntitySet="Product_unit" />
+          </AssociationSet>
+          <AssociationSet Name="FK_store_product_Product" Association="Self.FK_store_product_Product">
+            <End Role="Product" EntitySet="Products" />
+            <End Role="store_product" EntitySet="store_product" />
+          </AssociationSet>
+          <AssociationSet Name="FK_store_product_Store" Association="Self.FK_store_product_Store">
+            <End Role="Store" EntitySet="Stores" />
+            <End Role="store_product" EntitySet="store_product" />
+          </AssociationSet>
+          <EntitySet Name="Transfer_Product" EntityType="Company_storeEntities.Transfer_Product" />
+          <AssociationSet Name="FK_Transfer_Product_Product" Association="Company_storeEntities.FK_Transfer_Product_Product">
+            <End Role="Product" EntitySet="Products" />
+            <End Role="Transfer_Product" EntitySet="Transfer_Product" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Transfer_Product_Store" Association="Company_storeEntities.FK_Transfer_Product_Store">
+            <End Role="Store" EntitySet="Stores" />
+            <End Role="Transfer_Product" EntitySet="Transfer_Product" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Transfer_Product_Store1" Association="Company_storeEntities.FK_Transfer_Product_Store1">
+            <End Role="Store" EntitySet="Stores" />
+            <End Role="Transfer_Product" EntitySet="Transfer_Product" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Transfer_Product_Supplier" Association="Company_storeEntities.FK_Transfer_Product_Supplier">
+            <End Role="Supplier" EntitySet="Suppliers" />
+            <End Role="Transfer_Product" EntitySet="Transfer_Product" />
+          </AssociationSet>
+        </EntityContainer>
+        <EntityType Name="Transfer_Product">
+          <Key>
+            <PropertyRef Name="Transfer_id" />
+          </Key>
+          <Property Name="Transfer_id" Type="Int32" Nullable="false" />
+          <Property Name="From_store_id" Type="Int32" />
+          <Property Name="To_store_id" Type="Int32" />
+          <Property Name="Supplier_id" Type="Int32" />
+          <Property Name="Product_id" Type="Int32" />
+          <Property Name="Quantity" Type="Int32" />
+          <Property Name="unit" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Production_date" Type="DateTime" Precision="0" />
+          <Property Name="Expire_date" Type="DateTime" Precision="0" />
+          <NavigationProperty Name="Product" Relationship="Company_storeEntities.FK_Transfer_Product_Product" FromRole="Transfer_Product" ToRole="Product" />
+          <NavigationProperty Name="Store" Relationship="Company_storeEntities.FK_Transfer_Product_Store" FromRole="Transfer_Product" ToRole="Store" />
+          <NavigationProperty Name="Store1" Relationship="Company_storeEntities.FK_Transfer_Product_Store1" FromRole="Transfer_Product" ToRole="Store" />
+          <NavigationProperty Name="Supplier" Relationship="Company_storeEntities.FK_Transfer_Product_Supplier" FromRole="Transfer_Product" ToRole="Supplier" />
+          <Property Name="Transfer_date" Type="DateTime" Precision="0" />
+        </EntityType>
+        <Association Name="FK_Transfer_Product_Product">
+          <End Type="Company_storeEntities.Product" Role="Product" Multiplicity="0..1" />
+          <End Type="Company_storeEntities.Transfer_Product" Role="Transfer_Product" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Product">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="Transfer_Product">
+              <PropertyRef Name="Product_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Transfer_Product_Store">
+          <End Type="Company_storeEntities.Store" Role="Store" Multiplicity="0..1" />
+          <End Type="Company_storeEntities.Transfer_Product" Role="Transfer_Product" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Store">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="Transfer_Product">
+              <PropertyRef Name="From_store_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Transfer_Product_Store1">
+          <End Type="Company_storeEntities.Store" Role="Store" Multiplicity="0..1" />
+          <End Type="Company_storeEntities.Transfer_Product" Role="Transfer_Product" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Store">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="Transfer_Product">
+              <PropertyRef Name="To_store_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Transfer_Product_Supplier">
+          <End Type="Company_storeEntities.Supplier" Role="Supplier" Multiplicity="0..1" />
+          <End Type="Company_storeEntities.Transfer_Product" Role="Transfer_Product" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Supplier">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="Transfer_Product">
+              <PropertyRef Name="Supplier_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="Company_storeEntitiesStoreContainer" CdmEntityContainer="Company_storeEntities1">
+          <EntitySetMapping Name="Clients">
+            <EntityTypeMapping TypeName="Company_storeEntities.Client">
+              <MappingFragment StoreEntitySet="Client">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="First_Name" ColumnName="First_Name" />
+                <ScalarProperty Name="Last_Name" ColumnName="Last_Name" />
+                <ScalarProperty Name="Telephone" ColumnName="Telephone" />
+                <ScalarProperty Name="fax" ColumnName="fax" />
+                <ScalarProperty Name="mobile" ColumnName="mobile" />
+                <ScalarProperty Name="email" ColumnName="email" />
+                <ScalarProperty Name="website" ColumnName="website" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Export_perm">
+            <EntityTypeMapping TypeName="Company_storeEntities.Export_perm">
+              <MappingFragment StoreEntitySet="Export_perm">
+                <ScalarProperty Name="perm_id" ColumnName="perm_id" />
+                <ScalarProperty Name="supplier_id" ColumnName="supplier_id" />
+                <ScalarProperty Name="store_id" ColumnName="store_id" />
+                <ScalarProperty Name="perm_date" ColumnName="perm_date" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Export_product">
+            <EntityTypeMapping TypeName="Company_storeEntities.Export_product">
+              <MappingFragment StoreEntitySet="Export_product">
+                <ScalarProperty Name="Perm_id" ColumnName="Perm_id" />
+                <ScalarProperty Name="product_id" ColumnName="product_id" />
+                <ScalarProperty Name="quantity" ColumnName="quantity" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Import_perm">
+            <EntityTypeMapping TypeName="Company_storeEntities.Import_perm">
+              <MappingFragment StoreEntitySet="Import_perm">
+                <ScalarProperty Name="per_id" ColumnName="per_id" />
+                <ScalarProperty Name="supplier_id" ColumnName="supplier_id" />
+                <ScalarProperty Name="store_id" ColumnName="store_id" />
+                <ScalarProperty Name="perm_date" ColumnName="perm_date" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Import_product">
+            <EntityTypeMapping TypeName="Company_storeEntities.Import_product">
+              <MappingFragment StoreEntitySet="Import_product">
+                <ScalarProperty Name="perm_id" ColumnName="perm_id" />
+                <ScalarProperty Name="product_id" ColumnName="product_id" />
+                <ScalarProperty Name="quantity" ColumnName="quantity" />
+                <ScalarProperty Name="unit" ColumnName="unit" />
+                <ScalarProperty Name="production_date" ColumnName="production_date" />
+                <ScalarProperty Name="expire_date" ColumnName="expire_date" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Products">
+            <EntityTypeMapping TypeName="Company_storeEntities.Product">
+              <MappingFragment StoreEntitySet="Product">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Product_unit">
+            <EntityTypeMapping TypeName="Company_storeEntities.Product_unit">
+              <MappingFragment StoreEntitySet="Product_unit">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="unit" ColumnName="unit" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Stores">
+            <EntityTypeMapping TypeName="Company_storeEntities.Store">
+              <MappingFragment StoreEntitySet="Store">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="Manger_Name" ColumnName="Manger_Name" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="store_product">
+            <EntityTypeMapping TypeName="Company_storeEntities.store_product">
+              <MappingFragment StoreEntitySet="store_product">
+                <ScalarProperty Name="expire_date" ColumnName="expire_date" />
+                <ScalarProperty Name="production_date" ColumnName="production_date" />
+                <ScalarProperty Name="store_id" ColumnName="store_id" />
+                <ScalarProperty Name="product_id" ColumnName="product_id" />
+                <ScalarProperty Name="quantity" ColumnName="quantity" />
+                <ScalarProperty Name="unit" ColumnName="unit" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Suppliers">
+            <EntityTypeMapping TypeName="Company_storeEntities.Supplier">
+              <MappingFragment StoreEntitySet="Supplier">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="First_Name" ColumnName="First_Name" />
+                <ScalarProperty Name="Last_Name" ColumnName="Last_Name" />
+                <ScalarProperty Name="Telephone" ColumnName="Telephone" />
+                <ScalarProperty Name="fax" ColumnName="fax" />
+                <ScalarProperty Name="mobile" ColumnName="mobile" />
+                <ScalarProperty Name="email" ColumnName="email" />
+                <ScalarProperty Name="website" ColumnName="website" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Transfer_Product">
+            <EntityTypeMapping TypeName="Company_storeEntities.Transfer_Product">
+              <MappingFragment StoreEntitySet="Transfer_Product">
+                <ScalarProperty Name="Transfer_date" ColumnName="Transfer_date" />
+                <ScalarProperty Name="Expire_date" ColumnName="Expire_date" />
+                <ScalarProperty Name="Production_date" ColumnName="Production_date" />
+                <ScalarProperty Name="unit" ColumnName="unit" />
+                <ScalarProperty Name="Quantity" ColumnName="Quantity" />
+                <ScalarProperty Name="Product_id" ColumnName="Product_id" />
+                <ScalarProperty Name="Supplier_id" ColumnName="Supplier_id" />
+                <ScalarProperty Name="To_store_id" ColumnName="To_store_id" />
+                <ScalarProperty Name="From_store_id" ColumnName="From_store_id" />
+                <ScalarProperty Name="Transfer_id" ColumnName="Transfer_id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="true" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>

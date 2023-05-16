@@ -1,0 +1,46 @@
+H:\Programing\ITI\Programming Data\Project\Company_Store_Project\Company_Store_Project\bin\Debug\Company_Store_Project.exe.config
+H:\Programing\ITI\Programming Data\Project\Company_Store_Project\Company_Store_Project\bin\Debug\Company_Store_Project.exe
+H:\Programing\ITI\Programming Data\Project\Company_Store_Project\Company_Store_Project\bin\Debug\Company_Store_Project.pdb
+H:\Programing\ITI\Programming Data\Project\Company_Store_Project\Company_Store_Project\bin\Debug\EntityFramework.dll
+H:\Programing\ITI\Programming Data\Project\Company_Store_Project\Company_Store_Project\bin\Debug\EntityFramework.SqlServer.dll
+H:\Programing\ITI\Programming Data\Project\Company_Store_Project\Company_Store_Project\bin\Debug\EntityFramework.xml
+H:\Programing\ITI\Programming Data\Project\Company_Store_Project\Company_Store_Project\bin\Debug\EntityFramework.SqlServer.xml
+H:\Programing\ITI\Programming Data\Project\Company_Store_Project\Company_Store_Project\obj\Debug\Company_Store_Project.csproj.AssemblyReference.cache
+H:\Programing\ITI\Programming Data\Project\Company_Store_Project\Company_Store_Project\obj\Debug\Company_Store_Project.csproj.SuggestedBindingRedirects.cache
+H:\Programing\ITI\Programming Data\Project\Company_Store_Project\Company_Store_Project\obj\Debug\Company_Store_Project.Clients_Inf.resources
+H:\Programing\ITI\Programming Data\Project\Company_Store_Project\Company_Store_Project\obj\Debug\Company_Store_Project.Main.resources
+H:\Programing\ITI\Programming Data\Project\Company_Store_Project\Company_Store_Project\obj\Debug\Company_Store_Project.Stores_Inf.resources
+H:\Programing\ITI\Programming Data\Project\Company_Store_Project\Company_Store_Project\obj\Debug\Company_Store_Project.Properties.Resources.resources
+H:\Programing\ITI\Programming Data\Project\Company_Store_Project\Company_Store_Project\obj\Debug\Company_Store_Project.Suppliers_Inf.resources
+H:\Programing\ITI\Programming Data\Project\Company_Store_Project\Company_Store_Project\obj\Debug\Company_Store_Project.csproj.GenerateResource.cache
+H:\Programing\ITI\Programming Data\Project\Company_Store_Project\Company_Store_Project\obj\Debug\Company_Store_Project.csproj.CoreCompileInputs.cache
+H:\Programing\ITI\Programming Data\Project\Company_Store_Project\Company_Store_Project\obj\Debug\Company_Store_Project.csproj.CopyComplete
+H:\Programing\ITI\Programming Data\Project\Company_Store_Project\Company_Store_Project\obj\Debug\Company_Store_Project.exe
+H:\Programing\ITI\Programming Data\Project\Company_Store_Project\Company_Store_Project\obj\Debug\Company_Store_Project.pdb
+H:\Programing\ITI\Programming Data\Project\Company_Store_Project\Company_Store_Project\obj\Debug\Company_Store_Project.Products_inf.resources
+H:\Programing\ITI\Programming Data\Project\Company_Store_Project\Company_Store_Project\obj\Debug\Company_Store_Project.Import_Export.resources
+H:\Programing\ITI\Programming Data\Project\Company_Store_Project\Company_Store_Project\obj\Debug\Company_Store_Project.Product_Transfer.resources
+H:\Programing\ITI\Programming Data\Project\Company_Store_Project\Company_Store_Project\obj\Debug\Company_Store_Project.Reports.resources
+H:\Programing\ITI\Programming Data\Project\last copy\Company_Store_Project\bin\Debug\Company_Store_Project.exe.config
+H:\Programing\ITI\Programming Data\Project\last copy\Company_Store_Project\bin\Debug\Company_Store_Project.exe
+H:\Programing\ITI\Programming Data\Project\last copy\Company_Store_Project\bin\Debug\Company_Store_Project.pdb
+H:\Programing\ITI\Programming Data\Project\last copy\Company_Store_Project\bin\Debug\EntityFramework.dll
+H:\Programing\ITI\Programming Data\Project\last copy\Company_Store_Project\bin\Debug\EntityFramework.SqlServer.dll
+H:\Programing\ITI\Programming Data\Project\last copy\Company_Store_Project\bin\Debug\EntityFramework.xml
+H:\Programing\ITI\Programming Data\Project\last copy\Company_Store_Project\bin\Debug\EntityFramework.SqlServer.xml
+H:\Programing\ITI\Programming Data\Project\last copy\Company_Store_Project\obj\Debug\Company_Store_Project.csproj.AssemblyReference.cache
+H:\Programing\ITI\Programming Data\Project\last copy\Company_Store_Project\obj\Debug\Company_Store_Project.csproj.SuggestedBindingRedirects.cache
+H:\Programing\ITI\Programming Data\Project\last copy\Company_Store_Project\obj\Debug\Company_Store_Project.Clients_Inf.resources
+H:\Programing\ITI\Programming Data\Project\last copy\Company_Store_Project\obj\Debug\Company_Store_Project.Import_Export.resources
+H:\Programing\ITI\Programming Data\Project\last copy\Company_Store_Project\obj\Debug\Company_Store_Project.Main.resources
+H:\Programing\ITI\Programming Data\Project\last copy\Company_Store_Project\obj\Debug\Company_Store_Project.Products_inf.resources
+H:\Programing\ITI\Programming Data\Project\last copy\Company_Store_Project\obj\Debug\Company_Store_Project.Product_Transfer.resources
+H:\Programing\ITI\Programming Data\Project\last copy\Company_Store_Project\obj\Debug\Company_Store_Project.Reports.resources
+H:\Programing\ITI\Programming Data\Project\last copy\Company_Store_Project\obj\Debug\Company_Store_Project.Stores_Inf.resources
+H:\Programing\ITI\Programming Data\Project\last copy\Company_Store_Project\obj\Debug\Company_Store_Project.Properties.Resources.resources
+H:\Programing\ITI\Programming Data\Project\last copy\Company_Store_Project\obj\Debug\Company_Store_Project.Suppliers_Inf.resources
+H:\Programing\ITI\Programming Data\Project\last copy\Company_Store_Project\obj\Debug\Company_Store_Project.csproj.GenerateResource.cache
+H:\Programing\ITI\Programming Data\Project\last copy\Company_Store_Project\obj\Debug\Company_Store_Project.csproj.CoreCompileInputs.cache
+H:\Programing\ITI\Programming Data\Project\last copy\Company_Store_Project\obj\Debug\Company_Store_Project.csproj.CopyComplete
+H:\Programing\ITI\Programming Data\Project\last copy\Company_Store_Project\obj\Debug\Company_Store_Project.exe
+H:\Programing\ITI\Programming Data\Project\last copy\Company_Store_Project\obj\Debug\Company_Store_Project.pdb
